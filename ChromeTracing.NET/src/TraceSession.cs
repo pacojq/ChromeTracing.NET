@@ -44,8 +44,8 @@ namespace ChromeTracing.NET
             ProfileResult result = new ProfileResult()
             {
                 Name = _name,
-                Start = _start * 1000,
-                End = end * 1000,
+                Start = _start,
+                End = end,
                 ThreadId = 0
             };
 

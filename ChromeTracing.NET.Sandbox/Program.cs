@@ -7,10 +7,19 @@ namespace ChromeTracing.NET.Sandbox
         public static void Main(string[] args)
         {
             ChromeTrace.Init();
+
+            DoTheStuff(7);
+        }
+
+        public static void DoTheStuff(int reps)
+        {
+            if (reps <= 0)
+                return;
             
-            using (ChromeTrace.Profile("Test"))
+            Random rand = new Random();
+            
+            using (ChromeTrace.Profile("Test " + reps % 2))
             {
-                Random rand = new Random();
                 int sleep = 1000 + rand.Next(1000);
                 
                 Console.WriteLine("Night night!");
@@ -19,6 +28,9 @@ namespace ChromeTracing.NET.Sandbox
                 
                 Console.WriteLine($"Woke up after {sleep} ms");
             }
+            
+            System.Threading.Thread.Sleep(rand.Next(100));
+            DoTheStuff(reps - 1);
         }
     }
 }

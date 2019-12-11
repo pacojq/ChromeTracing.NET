@@ -45,7 +45,7 @@ namespace ChromeTracing.NET
                 for (int i = 0; i < _results.Count - 1; i++)
                 {
                     str.Append(WriteProfile(_results[i]));
-                    str.Append(",");
+                    str.Append(",\n");
                 }
                 str.Append(WriteProfile(_results[_results.Count-1]));
             }
@@ -62,7 +62,7 @@ namespace ChromeTracing.NET
         
         private static string WriteHeader()
         {
-            return "{\"otherData\": {}, \"traceEvents\":[";
+            return "{\"otherData\": {}, \"traceEvents\":[\n";
         }
 
         private static string WriteProfile(ProfileResult result)
@@ -75,14 +75,14 @@ namespace ChromeTracing.NET
                 ph = 'X',
                 pid = 0,
                 tid = result.ThreadId,
-                ts = result.Start / 1000
+                ts = result.Start
             };
             return JsonConvert.SerializeObject(ev);
         }
         
         private static string WriteFooter()
         {
-            return "]}";
+            return "\n]}";
         }
         
     }
