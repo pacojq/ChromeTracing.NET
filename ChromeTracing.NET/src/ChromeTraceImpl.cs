@@ -73,7 +73,7 @@ namespace ChromeTracing.NET
                 name = result.Name,
                 dur = result.End - result.Start,
                 ph = 'X',
-                pid = 0,
+                pid = result.ProcessId,
                 tid = result.ThreadId,
                 ts = result.Start
             };

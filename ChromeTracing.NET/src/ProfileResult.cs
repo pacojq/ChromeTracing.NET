@@ -5,6 +5,7 @@ namespace ChromeTracing.NET
         public string Name;
         public long Start;
         public long End;
+        public string ProcessId;
         public uint ThreadId;
     }
 }

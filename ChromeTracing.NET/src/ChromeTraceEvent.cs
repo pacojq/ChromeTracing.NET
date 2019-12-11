@@ -11,7 +11,7 @@ namespace ChromeTracing.NET
         public long dur; // duration
         public long ts; // time-stamp
         public char ph; // phase
-        public uint pid; // Process Id
+        public string pid; // Process Id
         public uint tid; // Thread Id
     }
 }

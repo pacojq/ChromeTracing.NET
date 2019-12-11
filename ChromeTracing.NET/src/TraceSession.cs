@@ -13,11 +13,15 @@ namespace ChromeTracing.NET
 
         private readonly string _name;
         private readonly long _start;
+        
+        internal string ProcessId { get; }
+        
         private bool _stopped;
         
-        internal TraceSession(string name)
+        internal TraceSession(string name, string processId)
         {
             _name = name;
+            ProcessId = processId;
             _start = ChromeTrace.ElapsedMillis;
             _stopped = false;
         }
@@ -47,6 +51,7 @@ namespace ChromeTracing.NET
                 Name = _name,
                 Start = _start,
                 End = end,
+                ProcessId = ProcessId,
                 ThreadId = (uint) Thread.CurrentThread.ManagedThreadId
             };
 
