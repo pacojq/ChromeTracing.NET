@@ -30,5 +30,5 @@ When the application ends its execution, a ```trace.json``` file is generated. T
 can be directly loaded to Google Chrome's ```chrome://tracing``` tool.
 
 <p align="center">
-  <img src="res/test.png" alt="Screenshot with the result of the previous code execution displayed in the chrome://tracing tool" />
+  <img src="res/test-screenshot.png" alt="Screenshot with the result of the previous code execution displayed in the chrome://tracing tool" />
 </p>
