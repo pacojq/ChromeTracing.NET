@@ -1,4 +1,5 @@
 using System;
+using System.Threading;
 
 namespace ChromeTracing.NET
 {
@@ -46,7 +47,7 @@ namespace ChromeTracing.NET
                 Name = _name,
                 Start = _start,
                 End = end,
-                ThreadId = 0
+                ThreadId = (uint) Thread.CurrentThread.ManagedThreadId
             };
 
             ChromeTrace.AddProfileResult(result);

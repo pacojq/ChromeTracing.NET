@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 
 namespace ChromeTracing.NET.Sandbox
 {
@@ -8,15 +9,23 @@ namespace ChromeTracing.NET.Sandbox
         {
             ChromeTrace.Init();
 
-            DoTheStuff(7);
+            Random randOne = new Random();
+            Random randTwo = new Random(randOne.Next());
+            
+            Thread threadOne = new Thread(() => DoTheStuff(7, randOne));
+            Thread threadTwo = new Thread(() => DoTheStuff(7, randTwo));
+            
+            threadOne.Start();
+            threadTwo.Start();
+
+            threadOne.Join();
+            threadTwo.Join();
         }
 
-        public static void DoTheStuff(int reps)
+        public static void DoTheStuff(int reps, Random rand)
         {
             if (reps <= 0)
                 return;
-            
-            Random rand = new Random();
             
             using (ChromeTrace.Profile("Test " + reps % 2))
             {
@@ -30,7 +39,7 @@ namespace ChromeTracing.NET.Sandbox
             }
             
             System.Threading.Thread.Sleep(rand.Next(100));
-            DoTheStuff(reps - 1);
+            DoTheStuff(reps - 1, rand);
         }
     }
 }
