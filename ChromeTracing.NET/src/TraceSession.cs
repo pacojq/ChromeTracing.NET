@@ -1,5 +1,6 @@
 using System;
 using System.Threading;
+using ChromeTracing.NET.ChromeEvents;
 
 namespace ChromeTracing.NET
 {
@@ -22,7 +23,7 @@ namespace ChromeTracing.NET
         {
             _name = name;
             ProcessId = processId;
-            _start = ChromeTrace.ElapsedMillis;
+            _start = ChromeTrace.ElapsedMicroseconds;
             _stopped = false;
         }
 
@@ -44,18 +45,16 @@ namespace ChromeTracing.NET
                 return;
 
             _stopped = true;
-            long end =  ChromeTrace.ElapsedMillis;
-
-            ProfileResult result = new ProfileResult()
-            {
-                Name = _name,
-                Start = _start,
-                End = end,
-                ProcessId = ProcessId,
-                ThreadId = (uint) Thread.CurrentThread.ManagedThreadId
-            };
-
-            ChromeTrace.AddProfileResult(result);
+            long end =  ChromeTrace.ElapsedMicroseconds;
+            
+            ChromeEventComplete ev = new ChromeEventComplete(
+                _name,
+                ProcessId,
+                _start,
+                end
+            );
+            
+            ChromeTrace.AddEvent(ev);
         }
     }
 }

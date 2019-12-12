@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
+using ChromeTracing.NET.ChromeEvents;
 using Newtonsoft.Json;
 
 namespace ChromeTracing.NET
@@ -11,12 +12,12 @@ namespace ChromeTracing.NET
     /// </summary>
     internal class ChromeTraceImpl
     {
-        private readonly List<ProfileResult> _results;
+        private readonly List<IChromeEvent> _results;
 
 
         public ChromeTraceImpl()
         {
-            _results = new List<ProfileResult>();
+            _results = new List<IChromeEvent>();
         }
 
         ~ChromeTraceImpl()
@@ -25,9 +26,9 @@ namespace ChromeTracing.NET
         }
         
         
-        public void AddProfileResult(ProfileResult result)
+        public void AddEvent(IChromeEvent ev)
         {
-            _results.Add(result);
+            _results.Add(ev);
         }
         
         
@@ -60,28 +61,29 @@ namespace ChromeTracing.NET
         }
         
         
+        
+        
+        
+        
+        
+        
+        // Info about the format
+        // https://docs.google.com/document/d/1CvAClvFfyA5R-PhYUmn5OOQtYMH4h6I0nSsKchNAySU/preview
+        
+        
         private static string WriteHeader()
         {
             return "{\"otherData\": {}, \"traceEvents\":[\n";
         }
 
-        private static string WriteProfile(ProfileResult result)
+        private static string WriteProfile(IChromeEvent ev)
         {
-            ChromeTraceEvent ev = new ChromeTraceEvent()
-            {
-                cat = "function",
-                name = result.Name,
-                dur = result.End - result.Start,
-                ph = 'X',
-                pid = result.ProcessId,
-                tid = result.ThreadId,
-                ts = result.Start
-            };
             return JsonConvert.SerializeObject(ev);
         }
         
         private static string WriteFooter()
         {
+            //return "\n],\n\"displayTimeUnit\": \"ms\"}";
             return "\n]}";
         }
         

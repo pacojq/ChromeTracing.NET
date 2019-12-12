@@ -43,9 +43,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="src\ChromeEvents\ChromeEventCounter.cs" />
+    <Compile Include="src\ChromeEvents\ChromeEventComplete.cs" />
+    <Compile Include="src\ChromeEvents\ChromeEventDuration.cs" />
+    <Compile Include="src\ChromeEvents\ChromeEventInstant.cs" />
     <Compile Include="src\ChromeTrace.cs" />
     <Compile Include="src\ChromeTraceImpl.cs" />
-    <Compile Include="src\ChromeTraceEvent.cs" />
+    <Compile Include="src\IChromeEvent.cs" />
     <Compile Include="src\Logger.cs" />
     <Compile Include="src\ProfileResult.cs" />
     <Compile Include="src\TraceSession.cs" />
