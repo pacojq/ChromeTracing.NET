@@ -32,10 +32,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed">
-      <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data" />
@@ -50,12 +46,11 @@
     <Compile Include="src\ChromeTrace.cs" />
     <Compile Include="src\ChromeTraceImpl.cs" />
     <Compile Include="src\IChromeEvent.cs" />
+    <Compile Include="src\IChromeTracingLogger.cs" />
     <Compile Include="src\Logger.cs" />
     <Compile Include="src\ProfileResult.cs" />
+    <Compile Include="src\Serialization\JsonBuilder.cs" />
     <Compile Include="src\TraceSession.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

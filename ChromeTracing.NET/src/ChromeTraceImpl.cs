@@ -2,8 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
-using ChromeTracing.NET.ChromeEvents;
-using Newtonsoft.Json;
 
 namespace ChromeTracing.NET
 {
@@ -78,7 +76,7 @@ namespace ChromeTracing.NET
 
         private static string WriteProfile(IChromeEvent ev)
         {
-            return JsonConvert.SerializeObject(ev);
+            return ev.Serialize();
         }
         
         private static string WriteFooter()

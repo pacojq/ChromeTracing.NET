@@ -8,7 +8,7 @@ namespace ChromeTracing.NET
     /// should be replaced in the future by a proper logging
     /// library.
     /// </summary>
-    internal class Logger
+    internal class Logger : IChromeTracingLogger
     {
         public void Log(string msg)
         {

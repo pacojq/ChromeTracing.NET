@@ -1,4 +1,5 @@
 using System.Threading;
+using ChromeTracing.NET.Serialization;
 
 namespace ChromeTracing.NET.ChromeEvents
 {
@@ -19,6 +20,19 @@ namespace ChromeTracing.NET.ChromeEvents
             this.pid = process;
             this.tid = (uint) Thread.CurrentThread.ManagedThreadId;
             this.ts = ts;
+        }
+        
+        
+        public string Serialize()
+        {
+            JsonBuilder builder = new JsonBuilder();
+            builder.Add("cat", cat);
+            builder.Add("name", name);
+            builder.Add("ts", ts);
+            builder.Add("ph", ph);
+            builder.Add("pid", pid);
+            builder.Add("tid", tid);
+            return builder.Build();
         }
     }
 }

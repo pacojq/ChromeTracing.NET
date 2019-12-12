@@ -21,7 +21,7 @@ namespace ChromeTracing.NET
     public static class ChromeTrace
     {
         private static ChromeTraceImpl _impl;
-        internal static Logger Logger { get; private set; }
+        internal static IChromeTracingLogger Logger { get; private set; }
 
 
         private static Stopwatch _stopwatch;
@@ -32,10 +32,14 @@ namespace ChromeTracing.NET
         internal static long ElapsedMicroseconds => _stopwatch.ElapsedMilliseconds * 1000;
         
         
-        
         public static void Init()
         {
-            Logger = new Logger();
+            Init(new Logger());
+        }
+        
+        public static void Init(IChromeTracingLogger logger)
+        {
+            Logger = logger;
             
             _impl = new ChromeTraceImpl();
             _stopwatch = new Stopwatch();

@@ -1,7 +1,7 @@
 namespace ChromeTracing.NET
 {
-    public interface IChromeEvent
+    internal interface IChromeEvent
     {
-        
+        string Serialize();
     }
 }
