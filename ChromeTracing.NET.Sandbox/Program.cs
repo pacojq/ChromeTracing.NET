@@ -11,25 +11,23 @@ namespace ChromeTracing.NET.Sandbox
 
             Random randOne = new Random();
             Random randTwo = new Random(randOne.Next());
+            Random randThree = new Random(randTwo.Next());
             
-            TraceSession sessionOne = ChromeTrace.Profile("Session One");
-            TraceSession sessionTwo = ChromeTrace.Profile("Session Two");
             
-            Thread threadOne = new Thread(() => DoTheStuff(7, randOne, sessionOne));
-            Thread threadTwo = new Thread(() => DoTheStuff(7, randTwo, sessionTwo));
+            Thread threadOne = new Thread(() => DoTheStuff(5, randOne, "Session One"));
+            Thread threadTwo = new Thread(() => DoTheStuff(5, randTwo, "Session One"));
+            Thread threadThree = new Thread(() => DoTheStuff(5, randThree, "Session Two"));
 
             threadOne.Start();
             threadTwo.Start();
+            threadThree.Start();
 
             threadOne.Join();
-            sessionOne.Dispose();
-            
             threadTwo.Join();
-            sessionTwo.Dispose();
-            
+            threadThree.Join();
         }
 
-        public static void DoTheStuff(int reps, Random rand, TraceSession session)
+        public static void DoTheStuff(int reps, Random rand, string session)
         {
             if (reps <= 0)
                 return;

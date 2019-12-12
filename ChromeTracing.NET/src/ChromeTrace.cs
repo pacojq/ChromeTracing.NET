@@ -56,14 +56,9 @@ namespace ChromeTracing.NET
             _impl.Dispose();
         }
         
-        public static TraceSession Profile(string name)
+        public static TraceSession Profile(string name, string process = "default")
         {
-            return new TraceSession(name, name);
-        }
-        
-        public static TraceSession Profile(string name, TraceSession parent)
-        {
-            return new TraceSession(name, parent.ProcessId);
+            return new TraceSession(name, process);
         }
 
         internal static void AddProfileResult(ProfileResult result)
