@@ -44,18 +44,18 @@ namespace ChromeTracing.NET
         {
             DateTime dt = DateTime.Now;
             string str = dt.ToLongTimeString().Replace(':', '_');
-            Write("flush_" + str + ".json");
+            _fileWriter.WriteTemp(Write(), "flush_" + str + ".json");
         }
         
 
         public void Dispose()
         {
             ChromeTrace.Logger.Log("ChromeTracing.NET disposing...");
-            Write("trace.json");
+            _fileWriter.Write(Write(), "trace.json");
         }
 
 
-        private void Write(string filename)
+        private string Write()
         {
             StringBuilder str = new StringBuilder();
 
@@ -72,8 +72,7 @@ namespace ChromeTracing.NET
             }
             
             str.Append(WriteFooter());
-            
-            _fileWriter.Write(str.ToString(), filename);
+            return str.ToString();
         }
         
         
