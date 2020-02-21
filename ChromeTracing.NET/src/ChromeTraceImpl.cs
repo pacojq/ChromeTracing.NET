@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
+using ChromeTracing.NET.Serialization;
 
 namespace ChromeTracing.NET
 {
@@ -11,11 +12,14 @@ namespace ChromeTracing.NET
     internal class ChromeTraceImpl
     {
         private readonly List<IChromeEvent> _results;
-
+        
+        private IFileWriter _fileWriter;
+        
 
         public ChromeTraceImpl()
         {
             _results = new List<IChromeEvent>();
+            _fileWriter = new PcFileWriter();
         }
 
         ~ChromeTraceImpl()
@@ -23,18 +27,35 @@ namespace ChromeTracing.NET
             Dispose();
         }
         
+        public void SetFileWriter(IFileWriter fileWriter)
+        {
+            _fileWriter = fileWriter;
+        }
+        
         
         public void AddEvent(IChromeEvent ev)
         {
             _results.Add(ev);
         }
-        
+
+
+
+        public void Flush()
+        {
+            DateTime dt = DateTime.Now;
+            Write("flush_" + dt.ToLongTimeString() + ".json");
+        }
         
 
         public void Dispose()
         {
             ChromeTrace.Logger.Log("ChromeTracing.NET disposing...");
-            
+            Write("trace.json");
+        }
+
+
+        private void Write(string filename)
+        {
             StringBuilder str = new StringBuilder();
 
             str.Append(WriteHeader());
@@ -51,11 +72,7 @@ namespace ChromeTracing.NET
             
             str.Append(WriteFooter());
             
-            
-            string filename = Path.Combine(Environment.CurrentDirectory, "trace.json");
-            File.WriteAllText(filename, str.ToString());
-            
-            ChromeTrace.Logger.Log("ChromeTracing.NET trace file created: " + filename);
+            _fileWriter.Write(str.ToString(), filename);
         }
         
         

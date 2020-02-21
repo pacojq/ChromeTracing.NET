@@ -48,6 +48,14 @@ namespace ChromeTracing.NET
             Logger.Log("ChromeTracing.NET successfully initialized!");
         }
 
+
+        public static void SetFileWriter(IFileWriter fileWriter)
+        {
+            _impl.SetFileWriter(fileWriter);
+        }
+        
+        
+
         /// <summary>
         /// <para>
         /// To be called when we want ChromeTrace.NET to shut down and
@@ -71,8 +79,16 @@ namespace ChromeTracing.NET
         {
             _impl.AddEvent(ev);
         }
-        
-        
+
+
+
+        /// <summary>
+        /// Writes the current trace state in a file.
+        /// </summary>
+        public static void Flush()
+        {
+            _impl.Flush();
+        }
         
         
         

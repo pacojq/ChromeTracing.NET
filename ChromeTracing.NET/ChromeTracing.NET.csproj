@@ -47,9 +47,11 @@
     <Compile Include="src\ChromeTraceImpl.cs" />
     <Compile Include="src\IChromeEvent.cs" />
     <Compile Include="src\IChromeTracingLogger.cs" />
+    <Compile Include="src\IFileWriter.cs" />
     <Compile Include="src\Logger.cs" />
     <Compile Include="src\ProfileResult.cs" />
     <Compile Include="src\Serialization\JsonBuilder.cs" />
+    <Compile Include="src\Serialization\PcFileWriter.cs" />
     <Compile Include="src\TraceSession.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
