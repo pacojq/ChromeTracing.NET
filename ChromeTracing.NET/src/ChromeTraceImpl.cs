@@ -43,7 +43,8 @@ namespace ChromeTracing.NET
         public void Flush()
         {
             DateTime dt = DateTime.Now;
-            Write("flush_" + dt.ToLongTimeString() + ".json");
+            string str = dt.ToLongTimeString().Replace(':', '_');
+            Write("flush_" + str + ".json");
         }
         
 
