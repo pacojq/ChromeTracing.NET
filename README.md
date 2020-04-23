@@ -1,4 +1,7 @@
+<a href="https://www.safecreative.org/work/2004233750167" xmlns:cc="http://creativecommons.org/ns#" rel="cc:license"><img src="https://resources.safecreative.org/work/2004233750167/label/logo-300" style="border:0;" alt="Safe Creative #2004233750167"/></a>
+
 # ChromeTracing.NET
+
 A C# visual profiling library using Google Chrome's [tracing](https://www.chromium.org/developers/how-tos/trace-event-profiling-tool) tool.
 
 
